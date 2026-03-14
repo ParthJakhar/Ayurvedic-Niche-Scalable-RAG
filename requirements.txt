@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+langchain-qdrant
+langchain-huggingface
+qdrant-client
+sentence-transformers
+# switch to new Google SDK
+google-genai
