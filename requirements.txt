@@ -3,7 +3,11 @@ uvicorn[standard]
 python-dotenv
 langchain-qdrant
 langchain-huggingface
+langchain-community
+langchain-text-splitters
 qdrant-client
 sentence-transformers
+pypdf
+redis
 # switch to new Google SDK
 google-genai
