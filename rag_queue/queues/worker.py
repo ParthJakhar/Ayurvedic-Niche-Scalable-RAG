@@ -44,7 +44,7 @@ def process_query(query: str) -> str:
     )
 
     chat = client.chats.create(
-        model="gemini-1.5-flash",
+        model="gemini-2.5-flash",
         config=GenerateContentConfig(system_instruction=system_prompt),
     )
     resp = chat.send_message(query)

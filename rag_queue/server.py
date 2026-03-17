@@ -49,6 +49,5 @@ def job_status(job_id: str = Query(..., description="Job ID to check")):
     if error is not None:
         return {"status": "failed", "error": error}
 
-    # Neither result nor error stored yet; job may still be queued or processing
-    # We can't distinguish queued vs processing with current data, so just say "pending".
+    
     return {"status": "pending", "job_id": job_id}
