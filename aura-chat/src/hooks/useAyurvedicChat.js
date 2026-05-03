@@ -1,6 +1,24 @@
 import { useState, useCallback, useRef } from "react";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "http://localhost:8010";
+
+const USER_ID_KEY = "ayur_user_id";
+
+function getOrCreateUserId() {
+  try {
+    let id = localStorage.getItem(USER_ID_KEY);
+    if (!id) {
+      id =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `user-${Date.now()}`;
+      localStorage.setItem(USER_ID_KEY, id);
+    }
+    return id;
+  } catch {
+    return "anonymous";
+  }
+}
 
 export const useAyurvedicChat = () => {
   const [messages, setMessages] = useState([]);
@@ -67,13 +85,20 @@ export const useAyurvedicChat = () => {
     setIsSending(true);
 
     try {
+      const userId = getOrCreateUserId();
       const res = await fetch(
-        `${API_BASE}/chat?query=${encodeURIComponent(trimmed)}`,
+        `${API_BASE}/chat?query=${encodeURIComponent(trimmed)}&user_id=${encodeURIComponent(userId)}`,
         {
           method: "POST",
         },
       );
+      if (!res.ok) {
+        throw new Error(`Chat request failed: ${res.status}`);
+      }
       const data = await res.json();
+      if (!data?.job_id) {
+        throw new Error("Missing job_id in chat response");
+      }
       updateMessage(aiMsgId, { status: "pending" });
       pollJobStatus(data.job_id, aiMsgId);
     } catch (err) {

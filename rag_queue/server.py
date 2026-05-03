@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
+from pathlib import Path
 
-load_dotenv()
+ROOT_ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
+load_dotenv(dotenv_path=ROOT_ENV_PATH)
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -27,8 +29,9 @@ def root():
 @app.post("/chat")
 def chat(
     query: str = Query(..., description="The chat query of user"),
+    user_id: str = Query("anonymous", description="Stable id for Mem0 user memory"),
 ):
-    job_id = enqueue_query(query)
+    job_id = enqueue_query(query, user_id=user_id)
     return {"status": "queued", "job_id": job_id}
 
 

@@ -9,5 +9,7 @@ qdrant-client
 sentence-transformers
 pypdf
 redis
-# switch to new Google SDK
-google-genai
+openai
+mem0ai[nlp]
+fastembed
+neo4j

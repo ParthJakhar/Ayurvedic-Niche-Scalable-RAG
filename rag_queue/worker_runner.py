@@ -20,10 +20,11 @@ def run_worker(poll_interval: float = 1.0) -> None:
         payload = json.loads(raw)
         job_id = payload.get("job_id")
         query = payload.get("query")
+        user_id = payload.get("user_id") or "anonymous"
         print(f"Processing {job_id} with query: {query!r}")
 
         try:
-            result = process_query(query)
+            result = process_query(query, user_id=user_id)
             redis_conn.set(f"{job_id}:result", result)
             print(f"Job {job_id} completed.")
         except Exception as e:  # noqa: BLE001
