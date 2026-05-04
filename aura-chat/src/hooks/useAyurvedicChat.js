@@ -73,7 +73,10 @@ export const useAyurvedicChat = () => {
           method: "POST",
         },
       );
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.job_id) {
+        throw new Error(data.detail || data.message || "Chat request failed");
+      }
       updateMessage(aiMsgId, { status: "pending" });
       pollJobStatus(data.job_id, aiMsgId);
     } catch (err) {

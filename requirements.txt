@@ -9,5 +9,6 @@ qdrant-client
 sentence-transformers
 pypdf
 redis
+httpx
 # switch to new Google SDK
 google-genai
