@@ -2,7 +2,7 @@ import multiprocessing
 from pathlib import Path
 
 
-from server import app
+from .server import app
 import uvicorn
 from dotenv import load_dotenv
 
