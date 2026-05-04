@@ -3,8 +3,8 @@ import time
 
 from redis import Redis
 
-from .queues.worker import process_query
-from .client.rq_client import QUEUE_NAME
+from queues.worker import process_query
+from client.rq_client import QUEUE_NAME
 
 
 redis_conn = Redis(host="localhost", port=6379, decode_responses=True)

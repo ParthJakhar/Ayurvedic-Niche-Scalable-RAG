@@ -4,8 +4,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.jsx";
+import Quiz from "./pages/Quiz.jsx";
+import DailyPlanner from "./pages/DailyPlanner.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import Hospitals from "./pages/Hospitals.jsx";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ const App = () => (
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/hospitals" element={<Hospitals />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/daily-planner" element={<DailyPlanner />} />
+          <Route path="/diet-planner" element={<DailyPlanner />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

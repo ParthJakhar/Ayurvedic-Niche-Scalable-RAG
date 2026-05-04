@@ -92,12 +92,18 @@ export const useAyurvedicChat = () => {
           method: "POST",
         },
       );
+<<<<<<< HEAD
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.job_id) {
+        throw new Error(data.detail || data.message || "Chat request failed");
+=======
       if (!res.ok) {
         throw new Error(`Chat request failed: ${res.status}`);
       }
       const data = await res.json();
       if (!data?.job_id) {
         throw new Error("Missing job_id in chat response");
+>>>>>>> 21a29075ba8e17099aadcd3073689d307c84b479
       }
       updateMessage(aiMsgId, { status: "pending" });
       pollJobStatus(data.job_id, aiMsgId);

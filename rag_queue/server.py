@@ -4,10 +4,10 @@ from pathlib import Path
 ROOT_ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(dotenv_path=ROOT_ENV_PATH)
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from .client.rq_client import enqueue_query, redis_conn
+from client.rq_client import enqueue_query, redis_conn
 
 
 app = FastAPI()
@@ -52,5 +52,4 @@ def job_status(job_id: str = Query(..., description="Job ID to check")):
     if error is not None:
         return {"status": "failed", "error": error}
 
-    
     return {"status": "pending", "job_id": job_id}
