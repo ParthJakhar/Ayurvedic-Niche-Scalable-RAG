@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, RotateCcw } from "lucide-react";
 
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { savePrakritiResults } from "@/lib/quizResultsStorage";
 
 const DOSHA = /** @type {const} */ ({
   vata: "Vata",
@@ -192,6 +193,15 @@ const Quiz = () => {
 
   const currentAnswer = answers[currentIdx] || "";
 
+  useEffect(() => {
+    if (!isDone) return;
+    savePrakritiResults({
+      scores,
+      tied: dominant.tied,
+      quizTotal: total,
+    });
+  }, [isDone, scores, dominant.tied, total]);
+
   if (isDone) {
     const primaryLabel = dominant.tied.map((k) => DOSHA[k]).join(" - ");
 
@@ -242,11 +252,16 @@ const Quiz = () => {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="justify-between gap-3">
+              <CardFooter className="flex-wrap justify-between gap-3">
                 <Button asChild variant="outline">
                   <Link to="/">Back to chat</Link>
                 </Button>
-                <Button onClick={reset}>Take quiz again</Button>
+                <div className="flex flex-wrap gap-2">
+                  <Button asChild variant="secondary">
+                    <Link to="/daily-planner">View daily planner</Link>
+                  </Button>
+                  <Button onClick={reset}>Take quiz again</Button>
+                </div>
               </CardFooter>
             </Card>
           </div>

@@ -1,10 +1,12 @@
 import { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Leaf, Sparkles, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Leaf, Sparkles, MapPin, ClipboardList, ListChecks } from 'lucide-react';
 import ChatMessage from '@/components/ChatMessage';
 import ChatInput from '@/components/ChatInput';
 import { useAyurvedicChat } from '@/hooks/useAyurvedicChat';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogHeader, DialogDescription } from '@/components/ui/dialog';
+import StoreLocator from '@/components/StoreLocator';
 
 const suggestions = [
   'How to balance Vata in winter?',
@@ -44,13 +46,39 @@ const Index = () => {
           </div>
         </div>
 
-        <Link
-          to="/hospitals"
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sage-bg text-primary text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
-        >
-          <MapPin className="w-3.5 h-3.5" />
-          Hospitals
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/quiz"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border bg-card text-foreground text-xs font-medium hover:border-gold hover:bg-sage-bg/50 transition-colors duration-200"
+          >
+            <ClipboardList className="w-3.5 h-3.5" />
+            Prakriti Quiz
+          </Link>
+          <Link
+            to="/daily-planner"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border bg-card text-foreground text-xs font-medium hover:border-gold hover:bg-sage-bg/50 transition-colors duration-200"
+          >
+            <ListChecks className="w-3.5 h-3.5" />
+            Daily planner
+          </Link>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sage-bg text-primary text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-200">
+              <MapPin className="w-3.5 h-3.5" />
+              Find Stores
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[600px]">
+            <DialogHeader>
+              <DialogTitle>Nearby Ayurvedic Stores</DialogTitle>
+              <DialogDescription>
+                Find authentic Ayurvedic and herbal stores near your location.
+              </DialogDescription>
+            </DialogHeader>
+            <StoreLocator />
+          </DialogContent>
+        </Dialog>
+        </div>
       </header>
 
       {/* Messages */}
