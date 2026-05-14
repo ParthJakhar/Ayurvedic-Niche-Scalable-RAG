@@ -1,0 +1,21 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+langchain-qdrant
+langchain-huggingface
+langchain-community
+langchain-text-splitters
+qdrant-client
+sentence-transformers
+pypdf
+redis
+<<<<<<< HEAD
+httpx
+# switch to new Google SDK
+google-genai
+=======
+openai
+mem0ai[nlp]
+fastembed
+neo4j
+>>>>>>> 21a29075ba8e17099aadcd3073689d307c84b479

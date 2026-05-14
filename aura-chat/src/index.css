@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 120 14% 94%;
+    --foreground: 160 18% 14%;
+
+    --card: 120 14% 97%;
+    --card-foreground: 160 18% 14%;
+
+    --popover: 120 14% 97%;
+    --popover-foreground: 160 18% 14%;
+
+    --primary: 160 38% 15%;
+    --primary-foreground: 120 14% 94%;
+
+    --secondary: 160 33% 27%;
+    --secondary-foreground: 120 14% 94%;
+
+    --muted: 120 10% 92%;
+    --muted-foreground: 150 6% 43%;
+
+    --accent: 41 63% 44%;
+    --accent-foreground: 160 38% 15%;
+
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 120 10% 88%;
+    --input: 120 10% 85%;
+    --ring: 160 38% 15%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --alabaster: 120 14% 94%;
+    --forest: 160 38% 15%;
+    --forest-hover: 160 33% 27%;
+    --gold: 41 63% 44%;
+    --gold-muted: 41 40% 65%;
+    --sage-bg: 120 20% 91%;
+    --sage-text: 150 10% 38%;
+
+    --shadow-sm: 0 1px 3px hsla(160, 38%, 15%, 0.04);
+    --shadow-md: 0 8px 24px -6px hsla(160, 38%, 15%, 0.08);
+    --shadow-lg: 0 20px 48px -12px hsla(160, 38%, 15%, 0.1);
+    --shadow-card: 0 1px 4px hsla(160, 38%, 15%, 0.06), 0 4px 12px hsla(160, 38%, 15%, 0.04);
+
+    --brand-curve: cubic-bezier(0.22, 1, 0.36, 1);
+
+    --sidebar-background: 120 14% 95%;
+    --sidebar-foreground: 160 18% 14%;
+    --sidebar-primary: 160 38% 15%;
+    --sidebar-primary-foreground: 120 14% 94%;
+    --sidebar-accent: 120 20% 91%;
+    --sidebar-accent-foreground: 160 18% 14%;
+    --sidebar-border: 120 10% 88%;
+    --sidebar-ring: 160 38% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+
+  .font-sans {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Pulsing online dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Markdown prose styling for AI messages */
+.ai-prose h1,
+.ai-prose h2,
+.ai-prose h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.01em;
+  color: hsl(var(--foreground));
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.ai-prose h1 { font-size: 1.5rem; font-weight: 600; }
+.ai-prose h2 { font-size: 1.25rem; font-weight: 600; }
+.ai-prose h3 { font-size: 1.1rem; font-weight: 500; }
+
+.ai-prose p {
+  margin-bottom: 0.75em;
+  line-height: 1.75;
+}
+
+.ai-prose ul,
+.ai-prose ol {
+  padding-left: 1.25rem;
+  margin-bottom: 0.75em;
+}
+
+.ai-prose ul { list-style-type: disc; }
+.ai-prose ol { list-style-type: decimal; }
+
+.ai-prose li {
+  margin-bottom: 0.35em;
+  line-height: 1.65;
+}
+
+.ai-prose strong {
+  font-weight: 600;
+  color: hsl(var(--forest));
+}
+
+.ai-prose code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+}
+
+.ai-prose blockquote {
+  border-left: 3px solid hsl(var(--gold));
+  padding-left: 1rem;
+  margin: 1em 0;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+}
+
+/* Scrollbar styling */
+.chat-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.3);
+}
